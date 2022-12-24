@@ -9,13 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+        let pokeAPI = PokeAPI()
+        let viewModel = PokemonListViewModel(pokeAPI: pokeAPI)
+        viewModel.fetchPokemon()
+        
+        return PokemonListView(viewModel: viewModel)
     }
 }
 

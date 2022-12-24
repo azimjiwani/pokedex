@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct Pokemon: Decodable {
+struct Pokemon: Decodable, Identifiable {
+    var id: String { name }
+    
     let name: String
     let sprites: Sprites
     
