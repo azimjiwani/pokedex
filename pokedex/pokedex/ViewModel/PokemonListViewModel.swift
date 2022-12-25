@@ -19,8 +19,14 @@ class PokemonListViewModel: ObservableObject {
     }
     
     func fetchPokemon() {
-        self.pokemons = pokeAPI.fetchPokemon()
+        pokeAPI.fetchPokemon { [weak self] pokemonArray in
+            DispatchQueue.main.async {
+                self?.pokemons = pokemonArray
+            }
+        }
     }
+
+
     
     func selectPokemon(_ pokemon: Pokemon) {
         selectedPokemon = pokemon
