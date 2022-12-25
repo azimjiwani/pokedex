@@ -14,7 +14,6 @@ struct ContentView: View {
         viewModel.fetchPokemon()
         
         return PokemonListView(viewModel: viewModel)
-            .frame(maxWidth: .infinity)
     }
 }
 

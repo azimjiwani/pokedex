@@ -23,7 +23,7 @@ struct PokemonListView: View {
                     .padding()
                     .transition(.scale)
             }
-                        
+            
             ScrollView(.vertical) {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(viewModel.pokemons, id: \.self) { pokemon in
@@ -35,7 +35,25 @@ struct PokemonListView: View {
                         }
                     }
                 }
+                .background(
+                    GeometryReader { geometry in
+                        Color.clear.preference(key: ScrollEndKey.self, value: [geometry.frame(in: .global).maxY])
+                    }
+                )
             }
         }
+        .onPreferenceChange(ScrollEndKey.self) { value in
+            let distanceFromBottom = value[0] - UIScreen.main.bounds.height
+            if distanceFromBottom < 100 && !self.viewModel.isLoading && self.viewModel.hasMorePokemon {
+                self.viewModel.fetchPokemon()
+            }
+        }
+    }
+}
+
+struct ScrollEndKey: PreferenceKey {
+    static var defaultValue: [CGFloat] = []
+    static func reduce(value: inout [CGFloat], nextValue: () -> [CGFloat]) {
+        value.append(contentsOf: nextValue())
     }
 }
