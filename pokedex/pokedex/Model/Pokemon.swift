@@ -7,19 +7,8 @@
 
 import Foundation
 
-struct Pokemon: Decodable, Identifiable {
+struct Pokemon: Decodable, Hashable {
     
     var name: String
     var imageURL: String?
-    
-    var id: String { name }
-//
-//    let name: String
-//    let sprites: Sprites
-    
-//    var imageData: Data {
-//        guard let url = URL(string: imageURL ?? "") else { return Data() }
-//        guard let data = try? Data(contentsOf: url) else { return Data() }
-//        return data
-//    }
 }
