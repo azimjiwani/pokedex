@@ -19,15 +19,7 @@ class PokemonListViewModel: ObservableObject {
     }
     
     func fetchPokemon() {
-        pokeAPI.fetchPokemon { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let pokemons):
-                self.pokemons = pokemons
-            case .failure(let error):
-                print(error)
-            }
-        }
+        self.pokemons = pokeAPI.fetchPokemon()
     }
     
     func selectPokemon(_ pokemon: Pokemon) {
