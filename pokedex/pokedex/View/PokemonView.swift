@@ -21,7 +21,7 @@ struct PokemonView: View {
                 image in image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: Constants.size, maxHeight: Constants.size)
+                    .frame(width: Constants.size, height: Constants.size)
             },
             placeholder: {
                 Image(systemName: "globe")
