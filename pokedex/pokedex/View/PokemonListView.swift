@@ -17,6 +17,7 @@ struct PokemonListView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             if viewModel.selectedPokemon != nil {
                 PokemonDetailView(pokemon: viewModel.selectedPokemon!)
                     .frame(maxWidth: .infinity)
