@@ -8,9 +8,9 @@
 import Foundation
 
 class PokeAPI {
-    func fetchPokemon(completion: @escaping ([Pokemon]) -> Void ) {
+    func fetchPokemon(limit: Int, offset: Int, completion: @escaping ([Pokemon]) -> Void ) {
         var pokemonArray = [Pokemon]()
-        let apiURL = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0")!
+        let apiURL = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=\(limit)&offset=\(offset)")!
         URLSession.shared.dataTask(with: apiURL) { data, response, error in
             if let data = data {
                 let decoder = JSONDecoder()
