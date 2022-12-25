@@ -9,7 +9,6 @@ import SwiftUI
 
 private enum Constants {
     static let verticalPadding: CGFloat = 24.0
-    static let size: CGFloat = 300.0
 }
 
 struct PokemonDetailView: View {
@@ -23,7 +22,7 @@ struct PokemonDetailView: View {
                     image in image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-//                        .frame(maxWidth: Constants.size, maxHeight: Constants.size)
+                        .frame(maxWidth: .infinity)
                 },
                 placeholder: {
                     Image(systemName: "globe")

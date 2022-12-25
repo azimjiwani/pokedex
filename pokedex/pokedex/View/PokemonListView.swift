@@ -11,6 +11,7 @@ struct PokemonListView: View {
     @ObservedObject var viewModel: PokemonListViewModel
     
     let columns = [GridItem(.flexible()),
+                   GridItem(.flexible()),
                    GridItem(.flexible())
     ]
     
@@ -18,22 +19,23 @@ struct PokemonListView: View {
         VStack {
             if viewModel.selectedPokemon != nil {
                 PokemonDetailView(pokemon: viewModel.selectedPokemon!)
+                    .frame(maxWidth: .infinity)
                     .padding()
                     .transition(.scale)
             }
-            
-            ScrollView {
+                        
+            ScrollView(.vertical) {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(viewModel.pokemons) { pokemon in
                         Button(action: {
                             self.viewModel.selectPokemon(pokemon)
                         }) {
                             PokemonView(pokemon: pokemon)
+                                .frame(maxWidth: .infinity)
                         }
                     }
                 }
             }
         }
-        .frame(maxWidth: .infinity)
     }
 }
