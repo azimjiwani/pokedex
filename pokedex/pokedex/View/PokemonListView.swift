@@ -26,7 +26,7 @@ struct PokemonListView: View {
                         
             ScrollView(.vertical) {
                 LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(viewModel.pokemons) { pokemon in
+                    ForEach(viewModel.pokemons, id: \.self) { pokemon in
                         Button(action: {
                             self.viewModel.selectPokemon(pokemon)
                         }) {
