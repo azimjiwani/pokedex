@@ -8,7 +8,7 @@
 import SwiftUI
 
 private enum Constants {
-    static let size: CGFloat = 100.0
+    static let size: CGFloat = 120.0
 }
 
 struct PokemonView: View {

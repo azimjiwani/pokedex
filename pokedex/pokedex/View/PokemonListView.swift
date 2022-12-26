@@ -18,6 +18,7 @@ struct PokemonListView: View {
     var body: some View {
         VStack {
             Spacer()
+            
             if viewModel.selectedPokemon != nil {
                 PokemonDetailView(pokemon: viewModel.selectedPokemon!)
                     .frame(maxWidth: .infinity)
@@ -33,29 +34,17 @@ struct PokemonListView: View {
                         }) {
                             PokemonView(pokemon: pokemon)
                                 .frame(maxWidth: .infinity)
+                                .onAppear {
+                                    if !self.viewModel.isLoading && self.viewModel.hasMorePokemon {
+                                        self.viewModel.fetchPokemon()
+                                    }
+                                }
                         }
                     }
                 }
-                .background(
-                    GeometryReader { geometry in
-                        Color.clear.preference(key: ScrollEndKey.self, value: [geometry.frame(in: .global).maxY])
-                    }
-                )
             }
+            
             Spacer()
         }
-        .onPreferenceChange(ScrollEndKey.self) { value in
-            let distanceFromBottom = value[0] - UIScreen.main.bounds.height
-            if distanceFromBottom < 100 && !self.viewModel.isLoading && self.viewModel.hasMorePokemon {
-                self.viewModel.fetchPokemon()
-            }
-        }
-    }
-}
-
-struct ScrollEndKey: PreferenceKey {
-    static var defaultValue: [CGFloat] = []
-    static func reduce(value: inout [CGFloat], nextValue: () -> [CGFloat]) {
-        value.append(contentsOf: nextValue())
     }
 }
