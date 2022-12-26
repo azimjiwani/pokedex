@@ -42,6 +42,7 @@ struct PokemonListView: View {
                     }
                 )
             }
+            Spacer()
         }
         .onPreferenceChange(ScrollEndKey.self) { value in
             let distanceFromBottom = value[0] - UIScreen.main.bounds.height
