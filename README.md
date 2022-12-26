@@ -23,11 +23,13 @@ The Model layer consists of a few different models.
 ### View Layer:
 The view layer consists of three views:
 1. **`PokemonView`**
-  This view creates the Pokemons shown in the grid while scrolling. It is achieved using `AsyncImage` which displays a placeholder image while the image is being loaded. This decision was made to prevent overloading the main thread.
+  This view creates the Pokemons shown in the grid while scrolling. It is achieved using `AsyncImage` which displays a globe placeholder image while the image is being loaded. This decision was made to prevent overloading the main thread.
 2. **`PokemonDetailView`**
   This view creates the Pokemon view shown when a Pokemon is tapped. It contains a larger image with white text for the name and a black background
 3. **`PokemonListView`**
-  This view presents the vertical grid scrolling view consisting of `PokemonView` and contains the logic to present `PokemonDetailView` when a Pokemon is tapped. It also calls the `fetchPokemon` method to load more Pokemon in the view when the user is scrolling and 100px from the bottom of the screen. It is achieved using `GeometryReader` and `PreferenceKey`
+  This view presents the vertical grid scrolling view consisting of `PokemonView` and contains the logic to present `PokemonDetailView` when a Pokemon is tapped.  
+  **Previous Version:** It also calls the `fetchPokemon` method to load more Pokemon in the view when the user is scrolling and 100px from the bottom of the screen. It is achieved using `GeometryReader` and `PreferenceKey`.  
+  **Current Version:** Using SwiftUI's built-in `.onAppear` method, more Pokemon is loaded by calling the `fetchPokemon` method when the user is scrolling and nearing the bottom of the page.
   
   ### ViewModel Layer:
   The `PokemonListViewModel`handles the logic to fetch and load all the Pokemon data from the Model layer and pass it to the View Layer.
